@@ -18,11 +18,15 @@ from django.contrib import admin
 from django.urls import path, re_path
 import django.views.static
 from core.settings import DEBUG, STATIC_ROOT, MEDIA_ROOT
-from ttw.views import index
+from ttw.views import index, MyDataClass
 
 urlpatterns = [
         path('admin/', admin.site.urls),
         path("", index, name="index"),
+
+        path("weather-data", MyDataClass.as_view(), name="weather-data"),
+        path("exchange", ExchangeClass.as_view(), name="exchange-data"),
+
         re_path(r'^static/(?P<path>.*)', django.views.static.serve, {'document_root': STATIC_ROOT,
                                                                      'show_indexes': DEBUG}),
         re_path(r'^media/(?P<path>.*)', django.views.static.serve, {'document_root': MEDIA_ROOT,
